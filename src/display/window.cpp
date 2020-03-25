@@ -26,7 +26,7 @@ Window::Window(int width, int height) : width(width), height(height) {
     // Important for GLEW
     glfwMakeContextCurrent(window);
 
-    glewExperimental = gle
+    // glewExperimental = gle
 }
 
 Window::~Window() {

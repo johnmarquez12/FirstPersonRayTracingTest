@@ -1,5 +1,5 @@
-#include <GLFW/include/glfw3.h>
 #include <GL/include/glew.h>
+#include <GLFW/include/glfw3.h>
 
 class Window {
     public:

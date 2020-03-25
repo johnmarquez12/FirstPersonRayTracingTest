@@ -3,7 +3,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
-#include <GLFW/glfw3.h>
+#include <GLFW/include/glfw3.h>
 
 using namespace glm;
 
