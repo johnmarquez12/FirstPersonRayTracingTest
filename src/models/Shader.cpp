@@ -1,7 +1,6 @@
 #include <models/Shader.h>
 
 void Shader::linkProgram(GLuint vertexShader, GLuint geometryShader, GLuint fragmentShader) {
-    char infoLog[512];
     GLint success;
 
     this->id = glCreateProgram();
@@ -22,8 +21,6 @@ void Shader::linkProgram(GLuint vertexShader, GLuint geometryShader, GLuint frag
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
     glDeleteShader(geometryShader);
-
-    glUseProgram(0);
 }
 
 
@@ -66,7 +63,7 @@ GLuint Shader::loadShader(GLenum type, char* filename) {
     return shader;
 }
 
-Shader::Shader(char* vShaderFile, char* gShaderFile, char* fShaderFile = "") {
+Shader::Shader(char* vShaderFile, char* fShaderFile, char* gShaderFile) {
 
     GLuint vShader = 0;
     GLuint fShader = 0;
@@ -81,3 +78,62 @@ Shader::Shader(char* vShaderFile, char* gShaderFile, char* fShaderFile = "") {
     linkProgram(vShader, gShader, fShader);
 
 }   
+
+void Shader::setVec3f(glm::fvec3 value, const GLchar* name)  {
+    use();
+
+    glUniform3fv(glGetUniformLocation(this->id, name), 1, glm::value_ptr(value));
+
+    unUse();
+}
+
+void Shader::setVec2f(glm::fvec2 value, const GLchar* name)  {
+    use();
+
+    glUniform3fv(glGetUniformLocation(this->id, name), 1, glm::value_ptr(value));
+
+    unUse();
+}
+
+void Shader::setFloat(GLfloat value, const GLchar* name)  {
+    use();
+
+    glUniform1f(glGetUniformLocation(this->id, name), value);
+
+    unUse();
+}
+
+void Shader::setMat4f(glm::mat4 value, const GLchar* name, GLboolean transpose)  {
+    use();
+
+    glUniformMatrix4fv(glGetUniformLocation(this->id, name), 1, transpose, glm::value_ptr(value));
+
+    unUse();
+}
+
+void Shader::setMat3f(glm::mat3 value, const GLchar* name, GLboolean transpose)  {
+    use();
+
+    glUniformMatrix3fv(glGetUniformLocation(this->id, name), 1, transpose, glm::value_ptr(value));
+
+    unUse();
+}
+
+template <typename T> void Shader::setUniform(T val, const GLchar* name, GLboolean transpose) {
+
+    this->use();
+
+    if (std::is_same_v<T, glm::fvec3>) 
+        glUniform3fv(glGetUniformLocation(this->id, name), 1, glm::value_ptr(val));
+    else if (std::is_same_v<T, glm::fvec2>) 
+        glUniform2fv(glGetUniformLocation(this->id, name), 1, glm::value_ptr(val));
+    else if (std::is_same_v<T, GLfloat>)
+        glUniform1f(glGetUniformLocation(this->id, name), val);
+    else if (std::is_same_v<T, glm::mat4>)
+        glUniformMatrix4fv(glGetUniformLocation(this->id, name), 1, transpose, glm::value_ptr(val));
+    else if (std::is_same_v<T, glm::mat3>)
+        glUniformMatrix3fv(glGetUniformLocation(this->id, name), 1, transpose, glm::value_ptr(val));   
+    else 
+        CORE_ERROR("ERROR::Shader Incompatible Type in Function setUniform \n"); 
+    this->unUse();
+}

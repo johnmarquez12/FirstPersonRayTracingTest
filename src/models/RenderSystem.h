@@ -1,6 +1,5 @@
 #pragma once
 
-#include <GLFW/include/glfw3.h>
 #include <display/window.h>
 #include <logger/log.h>
 
@@ -23,4 +22,4 @@ class RenderSystem {
 
         Window* window;
         int fps;
-}
+};

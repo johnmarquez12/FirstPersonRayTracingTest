@@ -1,14 +1,13 @@
-#ifndef _CAMERA_H_
-#define _CAMERA_H_
+#pragma once
 
+#include <GLFW/include/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
-#include <GLFW/include/glfw3.h>
 
 using namespace glm;
 
-float deltaTime = 0.0f;
-float lastFrame = 0.0f;
+//float deltaTime = 0.0f;
+//float lastFrame = 0.0f;
 
 class Camera {
 
@@ -43,5 +42,3 @@ class Camera {
         vec3 camForward;
         vec3 camUp;
 };
-
-#endif

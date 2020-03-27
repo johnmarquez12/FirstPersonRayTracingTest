@@ -153,10 +153,18 @@
     <ClCompile Include="src\display\window.cpp" />
     <ClCompile Include="src\logger\log.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\models\RenderSystem.cpp" />
+    <ClCompile Include="src\models\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\display\window.h" />
     <ClInclude Include="src\logger\log.h" />
+    <ClInclude Include="src\models\Mesh.h" />
+    <ClInclude Include="src\models\Model.h" />
+    <ClInclude Include="src\models\RenderSystem.h" />
+    <ClInclude Include="src\models\Shader.h" />
+    <ClInclude Include="src\models\Texture.h" />
+    <ClInclude Include="src\models\Vertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
